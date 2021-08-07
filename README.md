@@ -1,2 +1,4 @@
-# ds-projects
-My projects towards learning new knowledge and experience with Data Science and Analytics
+# nlp-multipurpose
+A one stop platform for all your Natural Language Processing needs.
+
+
