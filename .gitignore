@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+src/__pycache__
+.vscode/settings.json
+python3.7*
