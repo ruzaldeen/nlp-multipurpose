@@ -1,24 +1,42 @@
-#Author: Ruzaldeen Zainal Abidin 
+# Author: Ruzaldeen Zainal Abidin 
 '''
 text_processing.py
 '''
 
 from nltk import text
 from config import *
+from read_data import ReadData
 
-class TextProcessing(Config):
+class TextProcessing(ReadData):
 
     def __init__(self, data):
-        self.data = data
+        super().__init__(data)
 
     def __repr__(self):
         return self.data
 
-    @classmethod
-    def text_cleaning(cls, text_list):
+    def text_cleaning(self, input_type):
+        '''
+        Cleans the text from stopwords, contraction and other non-important elements.
+
+        Args
+        ----
+        input_type : bool
+            The method used to feed data. Uploaded file equals to True and direct string equals to False
+
+        Returns
+        -------
+        proc_string : str
+            The cleaned string
+        '''
         stop_words = set(stopwords.words('english'))
-        byte_text = b' '.join(text_list)
-        proc_text = str(byte_text).lower()
+
+        if input_type:
+            byte_text = b' '.join(self.data)
+            proc_text = str(byte_text).lower()
+        else:
+            proc_text = self.data.lower()
+
         proc_text = BeautifulSoup(proc_text, "lxml").text
         proc_text = re.sub(r'\([^)]*\)', '', proc_text)
         proc_text = re.sub('"','', proc_text)
@@ -33,4 +51,7 @@ class TextProcessing(Config):
             if len(i) >= 3:
                 long_word.append(i)
         
-        return (" ".join(long_word)).strip()
+        proc_string = (" ".join(long_word)).strip()
+        return proc_string
+
+    
